@@ -1,0 +1,44 @@
+aside {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+aside a {
+  display: inline-block;
+  width: 100%;
+  border-radius: var(--border-radius);
+}
+
+aside a.active {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+aside a,
+aside .profile {
+  margin: 0.5rem;
+  padding: 0.25rem;
+}
+
+aside i {
+  margin-right: 0.5rem;
+}
+
+aside button {
+  margin: 0.75rem;
+  width: 100%;
+}
+
+aside .profile {
+  width: 100%;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+aside .username {
+  padding-left: 0.5rem;
+}

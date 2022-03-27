@@ -24,7 +24,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-              to="/"
+              to="/archive"
               className={({ isActive }) => (isActive ? "active" : undefined)}
             >
               <i className="fa-solid fa-box-archive"></i> Archive
@@ -32,7 +32,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-              to="/"
+              to="/trash"
               className={({ isActive }) => (isActive ? "active" : undefined)}
             >
               <i className="fa-solid fa-trash-can"></i> Trash

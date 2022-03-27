@@ -1,7 +1,6 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
 import { Navbar, Sidebar } from "./components";
-import { Home, Label } from "./pages";
+import { AppRoutes } from "./routes/AppRoutes";
 
 function App() {
   return (
@@ -12,10 +11,7 @@ function App() {
         <section className="main-section">
           <Sidebar />
 
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/label" element={<Label />} />
-          </Routes>
+          <AppRoutes />
         </section>
       </div>
     </div>

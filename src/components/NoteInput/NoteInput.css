@@ -1,0 +1,44 @@
+.note-form {
+  max-width: 25rem;
+  margin: 1rem auto;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--primary-color);
+}
+
+.note-form input,
+.note-form textarea {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: none;
+  width: 100%;
+}
+
+.note-form .note-input {
+  display: flex;
+}
+
+.note-form textarea {
+  resize: none;
+}
+
+.note-form .input-primary textarea:focus {
+  outline: none;
+}
+
+.note-form .form-action .close-btn {
+  color: var(--primary-color);
+}
+
+.note-form .form-action button {
+  margin: 0.5rem;
+}
+
+.note-form .form-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.note-form .form-action button.primary-disabled {
+  background-color: var(--primary-disabled);
+}

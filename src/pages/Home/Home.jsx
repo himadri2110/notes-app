@@ -1,7 +1,11 @@
+import { NoteList } from "components/NoteList/NoteList";
+import { NoteInput } from "components/";
+
 const Home = () => {
   return (
     <div className="component-container">
-      <h1 className="text-center">Home</h1>
+      <NoteInput />
+      <NoteList />
     </div>
   );
 };

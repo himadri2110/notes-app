@@ -7,8 +7,9 @@ import "./NoteInput.css";
 const NoteInput = () => {
   const [showTextarea, setShowTextarea] = useState(false);
   const { token } = useAuth();
-
   const { input, setInput, formInputs, dispatchNote } = useNotes();
+
+  const buttonDisabled = !input.title && !input.content;
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -64,7 +65,16 @@ const NoteInput = () => {
         <button type="button" className="close-btn" onClick={closeNote}>
           Close
         </button>
-        <button type="submit" className="btn btn-primary">
+        <button
+          type="submit"
+          className={`btn btn-primary ${
+            buttonDisabled ? "primary-disabled" : null
+          }`}
+          style={{
+            cursor: buttonDisabled ? "not-allowed" : "pointer",
+          }}
+          disabled={buttonDisabled}
+        >
           Add
         </button>
       </div>

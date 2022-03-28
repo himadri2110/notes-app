@@ -38,3 +38,7 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.note-form .form-action button.primary-disabled {
+  background-color: var(--primary-disabled);
+}

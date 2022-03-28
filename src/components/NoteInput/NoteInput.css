@@ -38,7 +38,3 @@
   justify-content: space-between;
   align-items: center;
 }
-
-.form-action button span > * {
-  font-size: 1.2rem;
-}

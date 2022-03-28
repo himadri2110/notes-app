@@ -19,21 +19,15 @@ const NoteCard = ({ note }) => {
       <div className="card-time">{createdTime}</div>
 
       <div className="card-action">
-        <button type="button">
-          <span>
-            <ColorLensOutlinedIcon />
-          </span>
-        </button>
-        <button type="button">
-          <span>
-            <LabelOutlinedIcon />
-          </span>
-        </button>
-        <button type="button">
-          <span>
-            <ArchiveOutlinedIcon />
-          </span>
-        </button>
+        <i role="button">
+          <ColorLensOutlinedIcon />
+        </i>
+        <i role="button">
+          <LabelOutlinedIcon />
+        </i>
+        <i role="button">
+          <ArchiveOutlinedIcon />
+        </i>
       </div>
     </div>
   );

@@ -1,0 +1,14 @@
+.note-card .card-time {
+  padding: 0.75rem 0.75rem 0;
+}
+
+.note-card .card-action {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.note-card .card-action button {
+  width: max-content;
+  margin: 0 0.5rem;
+}

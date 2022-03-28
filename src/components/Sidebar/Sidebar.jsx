@@ -8,7 +8,7 @@ const Sidebar = () => {
         <ul>
           <li>
             <NavLink
-              to="/"
+              to="/home"
               className={({ isActive }) => (isActive ? "active" : undefined)}
             >
               <i className="fa-solid fa-house"></i> Home

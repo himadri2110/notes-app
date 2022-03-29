@@ -38,11 +38,6 @@ const Sidebar = () => {
               <i className="fa-solid fa-trash-can"></i> Trash
             </NavLink>
           </li>
-          <li>
-            <button className="btn btn-primary">
-              <i className="fa-solid fa-plus"></i> Add Note
-            </button>
-          </li>
         </ul>
 
         <div className="profile">

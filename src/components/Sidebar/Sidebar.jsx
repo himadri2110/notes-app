@@ -1,7 +1,10 @@
 import "./Sidebar.css";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "contexts";
 
 const Sidebar = () => {
+  const { logoutHandler } = useAuth();
+
   return (
     <section className="wrapper">
       <aside>
@@ -44,6 +47,10 @@ const Sidebar = () => {
           <div className="username">
             <i className="fa-solid fa-circle-user"></i> Admin
           </div>
+          <i
+            className="fa-solid fa-arrow-right-from-bracket"
+            onClick={logoutHandler}
+          ></i>
         </div>
       </aside>
     </section>

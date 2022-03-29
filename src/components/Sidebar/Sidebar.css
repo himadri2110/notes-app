@@ -37,6 +37,7 @@ aside .profile {
   font-weight: bold;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 aside .username {

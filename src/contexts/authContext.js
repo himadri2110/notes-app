@@ -12,9 +12,16 @@ const AuthProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("isAuth")) || false
   );
 
+  const logoutHandler = () => {
+    localStorage.removeItem("token");
+    localStorage.setItem("isAuth", false);
+    setIsAuth(false);
+    navigate("/");
+  };
+
   return (
     <AuthContext.Provider
-      value={{ isAuth, setIsAuth, token, setToken, navigate }}
+      value={{ isAuth, setIsAuth, token, setToken, navigate, logoutHandler }}
     >
       {children}
     </AuthContext.Provider>

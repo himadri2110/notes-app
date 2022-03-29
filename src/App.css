@@ -31,7 +31,7 @@
 section.main-section {
   flex-grow: 1;
   display: grid;
-  grid-template-columns: 10rem 1fr;
+  grid-template-columns: 12rem 1fr;
   color: var(--text-color);
 }
 
@@ -44,6 +44,7 @@ section.main-section {
 
 button {
   all: unset;
+  text-align: center;
   cursor: pointer;
   border: none;
 }

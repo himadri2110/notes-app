@@ -10,15 +10,6 @@ const formInputs = {
   content: "",
 };
 
-const notesObj = {
-  id: "",
-  title: "",
-  content: "",
-  initialBgColor: "#f3f3f3",
-  isPinned: true,
-  createdTime: "",
-};
-
 const NotesProvider = ({ children }) => {
   const { token } = useAuth();
 
@@ -92,7 +83,6 @@ const NotesProvider = ({ children }) => {
         formInputs,
         noteState,
         dispatchNote,
-        notesObj,
         showInput,
         setShowInput,
         submitForm,

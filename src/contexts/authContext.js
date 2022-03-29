@@ -7,6 +7,11 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
+  const guestUser = {
+    email: "adarshbalika@gmail.com",
+    password: "adarshBalika123",
+  };
+
   const [token, setToken] = useState(localStorage.getItem("token") || "");
 
   const [isAuth, setIsAuth] = useState(
@@ -62,6 +67,7 @@ const AuthProvider = ({ children }) => {
         loginInputHandler,
         loginHandler,
         logoutHandler,
+        guestUser,
       }}
     >
       {children}

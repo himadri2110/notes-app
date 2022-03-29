@@ -3,7 +3,8 @@ import { useAuth } from "../../../contexts/authContext";
 import { Link } from "react-router-dom";
 
 const Login = () => {
-  const { login, setLogin, loginInputHandler, loginHandler } = useAuth();
+  const { login, setLogin, loginInputHandler, loginHandler, guestUser } =
+    useAuth();
 
   return (
     <div className="page-wrapper page-login">
@@ -74,15 +75,7 @@ const Login = () => {
               <button
                 className="btn outline-primary"
                 type="submit"
-                onClick={() =>
-                  setLogin({
-                    ...login,
-                    input: {
-                      email: "adarshbalika@gmail.com",
-                      password: "adarshBalika123",
-                    },
-                  })
-                }
+                onClick={() => setLogin({ ...login, input: guestUser })}
               >
                 Guest Mode
               </button>

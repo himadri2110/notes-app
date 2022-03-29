@@ -1,40 +1,10 @@
-import { useState } from "react";
 import "../styles.css";
 import { useAuth } from "../../../contexts/authContext";
-import { loginService } from "../../../services";
 import { Link } from "react-router-dom";
 
 const Login = () => {
-  const { setIsAuth, setToken, navigate } = useAuth();
-
-  const [login, setLogin] = useState({
-    input: {},
-    error: "",
-    hide: { pwd: true },
-  });
-
-  const loginInputHandler = (e) => {
-    const { name, value } = e.target;
-    setLogin({ ...login, input: { ...login.input, [name]: value } });
-  };
-
-  const loginHandler = async (e) => {
-    e.preventDefault();
-
-    try {
-      const { data } = await loginService(login.input);
-      localStorage.setItem("isAuth", true);
-      localStorage.setItem("token", data.encodedToken);
-      setToken(data.encodedToken);
-
-      setLogin({ ...login, input: { email: "", password: "" } });
-      setIsAuth(true);
-
-      navigate("/home");
-    } catch (err) {
-      setLogin({ ...login, error: err.response.data.errors[0] });
-    }
-  };
+  const { login, setLogin, loginInputHandler, loginHandler, guestUser } =
+    useAuth();
 
   return (
     <div className="page-wrapper page-login">
@@ -105,15 +75,7 @@ const Login = () => {
               <button
                 className="btn outline-primary"
                 type="submit"
-                onClick={() =>
-                  setLogin({
-                    ...login,
-                    input: {
-                      email: "adarshbalika@gmail.com",
-                      password: "adarshBalika123",
-                    },
-                  })
-                }
+                onClick={() => setLogin({ ...login, input: guestUser })}
               >
                 Guest Mode
               </button>

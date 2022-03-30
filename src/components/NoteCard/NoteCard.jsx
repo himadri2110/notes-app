@@ -4,16 +4,25 @@ import {
   ColorLensOutlinedIcon,
   LabelOutlinedIcon,
   ArchiveOutlinedIcon,
+  UnarchiveOutlinedIcon,
   DeleteOutlinedIcon,
   PushPinIcon,
   PushPinOutlinedIcon,
 } from "assets/index";
-import { useNotes } from "contexts";
+import { useArchive, useNotes } from "contexts";
 
 const NoteCard = ({ note }) => {
   const { _id, title, content, createdTime } = note;
   const [showCardOptions, setShowCardOptions] = useState(false);
-  const { setShowInput, setInput, deleteNote } = useNotes();
+  const {
+    noteState: { archives },
+    setShowInput,
+    setInput,
+  } = useNotes();
+
+  const { archiveNote, unArchiveNote } = useArchive();
+
+  const inArchive = archives.find((eachNote) => eachNote._id === note._id);
 
   const changeBg = (e) => {
     e.stopPropagation();
@@ -62,9 +71,13 @@ const NoteCard = ({ note }) => {
             <LabelOutlinedIcon />
           </i>
           <i role="button">
-            <ArchiveOutlinedIcon />
+            {inArchive ? (
+              <UnarchiveOutlinedIcon onClick={(e) => unArchiveNote(e, note)} />
+            ) : (
+              <ArchiveOutlinedIcon onClick={(e) => archiveNote(e, note)} />
+            )}
           </i>
-          <i role="button" onClick={(e) => deleteNote(e, _id)}>
+          <i role="button">
             <DeleteOutlinedIcon />
           </i>
         </div>

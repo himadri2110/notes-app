@@ -4,7 +4,11 @@ import { useNotes } from "contexts";
 import "./Home.css";
 
 const Home = () => {
-  const { showInput, setShowInput } = useNotes();
+  const {
+    noteState: { notes },
+    showInput,
+    setShowInput,
+  } = useNotes();
 
   return (
     <div className="component-container home-container">
@@ -14,7 +18,7 @@ const Home = () => {
 
       {showInput ? <NoteInput /> : null}
 
-      <NoteList />
+      <NoteList notes={notes} />
     </div>
   );
 };

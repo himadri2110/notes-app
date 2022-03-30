@@ -41,7 +41,7 @@ const AuthProvider = ({ children }) => {
       setLogin({ ...login, input: { email: "", password: "" } });
       setIsAuth(true);
 
-      navigate("/home");
+      navigate("/");
     } catch (err) {
       setLogin({ ...login, error: err.response.data.errors[0] });
     }

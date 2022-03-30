@@ -14,7 +14,9 @@ const NoteInput = () => {
             type="text"
             placeholder="Title"
             value={input.title}
-            onChange={(e) => setInput({ ...input, title: e.target.value })}
+            onChange={(e) =>
+              setInput({ ...input, title: e.target.value.trim() })
+            }
             autoFocus
           />
         </div>
@@ -24,7 +26,9 @@ const NoteInput = () => {
             type="text"
             placeholder="Take a note..."
             value={input.content}
-            onChange={(e) => setInput({ ...input, content: e.target.value })}
+            onChange={(e) =>
+              setInput({ ...input, content: e.target.value.trim() })
+            }
           />
         </div>
 

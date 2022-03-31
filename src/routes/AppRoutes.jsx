@@ -2,7 +2,7 @@ import Mockman from "mockman-js";
 import { Routes, Route } from "react-router-dom";
 import { PrivateRoute } from "./PrivateRoutes";
 import { useAuth } from "../contexts";
-import { Login, Home, Label } from "../pages";
+import { Archive, Login, Home, Label } from "pages";
 import { Navbar, Sidebar } from "../components";
 
 const AppRoutes = () => {
@@ -26,7 +26,7 @@ const AppRoutes = () => {
 
             <Routes>
               <Route
-                path="/home"
+                path="/"
                 element={
                   <PrivateRoute>
                     <Home />
@@ -38,6 +38,14 @@ const AppRoutes = () => {
                 element={
                   <PrivateRoute>
                     <Label />
+                  </PrivateRoute>
+                }
+              ></Route>
+              <Route
+                path="/archive"
+                element={
+                  <PrivateRoute>
+                    <Archive />
                   </PrivateRoute>
                 }
               ></Route>

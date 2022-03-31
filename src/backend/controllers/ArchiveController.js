@@ -70,3 +70,42 @@ export const restoreFromArchivesHandler = function (schema, request) {
   this.db.users.update({ _id: user._id }, user);
   return new Response(200, {}, { archives: user.archives, notes: user.notes });
 };
+
+/**
+ * This handler handles updating an archived note
+ * send POST Request at /api/archives/:noteId
+ * body contains {note}
+ * */
+
+export const updateArchiveNoteHandler = function (schema, request) {
+  const user = requiresAuth.call(this, request);
+  try {
+    if (!user) {
+      new Response(
+        404,
+        {},
+        {
+          errors: ["The email you entered is not Registered. Not Found error"],
+        }
+      );
+    }
+    const { note } = JSON.parse(request.requestBody);
+    const { noteId } = request.params;
+    const noteIndex = user.archives.findIndex((note) => note._id === noteId);
+    user.archives[noteIndex] = { ...user.archives[noteIndex], ...note };
+    this.db.users.update({ _id: user._id }, user);
+    return new Response(
+      201,
+      {},
+      { archives: user.archives, notes: user.notes }
+    );
+  } catch (error) {
+    return new Response(
+      500,
+      {},
+      {
+        error,
+      }
+    );
+  }
+};

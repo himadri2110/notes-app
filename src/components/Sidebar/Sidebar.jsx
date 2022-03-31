@@ -11,7 +11,7 @@ const Sidebar = () => {
         <ul>
           <li>
             <NavLink
-              to="/home"
+              to="/"
               className={({ isActive }) => (isActive ? "active" : undefined)}
             >
               <i className="fa-solid fa-house"></i> Home

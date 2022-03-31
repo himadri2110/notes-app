@@ -5,6 +5,7 @@ import LabelOutlinedIcon from "@mui/icons-material/LabelOutlined";
 import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import UnarchiveOutlinedIcon from "@mui/icons-material/UnarchiveOutlined";
 
 export {
   PushPinIcon,
@@ -12,6 +13,7 @@ export {
   ColorLensOutlinedIcon,
   LabelOutlinedIcon,
   ArchiveOutlinedIcon,
+  UnarchiveOutlinedIcon,
   HomeOutlinedIcon,
   DeleteOutlinedIcon,
 };

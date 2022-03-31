@@ -5,8 +5,8 @@ const NoteList = ({ notes }) => {
   return (
     <div>
       <div className="notes-wrapper">
-        {notes.length > 0 ? (
-          notes.map((unPinnedNote) => {
+        {notes?.length > 0 ? (
+          notes?.map((unPinnedNote) => {
             return <NoteCard note={unPinnedNote} key={unPinnedNote._id} />;
           })
         ) : (

@@ -2,7 +2,8 @@ import { useNotes } from "../../contexts";
 import "./NoteInput.css";
 
 const NoteInput = () => {
-  const { input, setInput, noteExists, submitForm, closeNote } = useNotes();
+  const { input, setInput, noteExists, archiveExists, submitForm, closeNote } =
+    useNotes();
 
   const buttonDisabled = !input.title && !input.content;
 
@@ -46,7 +47,7 @@ const NoteInput = () => {
             }}
             disabled={buttonDisabled}
           >
-            {noteExists ? "Edit" : "Add"}
+            {noteExists || archiveExists ? "Save" : "Add"}
           </button>
         </div>
       </form>

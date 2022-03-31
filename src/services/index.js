@@ -7,3 +7,4 @@ export { editNoteService } from "./noteServices/editNoteService";
 export { getArchivedService } from "./archivedServices/getArchivedService";
 export { archiveNoteService } from "./archivedServices/archiveNoteService";
 export { unArchiveNoteService } from "./archivedServices/unArchiveNoteService";
+export { editArchiveService } from "./archivedServices/editArchiveService";

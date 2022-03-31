@@ -7,7 +7,12 @@ import {
 } from "react";
 import { noteReducer } from "reducers/noteReducer";
 import { useAuth } from "contexts";
-import { getNoteService, addNoteService, editNoteService } from "services";
+import {
+  getNoteService,
+  addNoteService,
+  editNoteService,
+  editArchiveService,
+} from "services";
 
 const NotesContext = createContext();
 
@@ -26,7 +31,10 @@ const NotesProvider = ({ children }) => {
   });
   const [showInput, setShowInput] = useState(false);
 
-  const noteExists = noteState.notes.find((note) => note._id === input._id);
+  const noteExists = noteState.notes?.find((note) => note._id === input._id);
+  const archiveExists = noteState.archives?.find(
+    (note) => note._id === input._id
+  );
 
   useEffect(() => {
     if (isAuth) {
@@ -51,7 +59,26 @@ const NotesProvider = ({ children }) => {
         );
 
         if (status === 201) {
-          dispatchNote({ type: "SET_NOTES", payload: data.notes });
+          dispatchNote({
+            type: "SET_NOTES",
+            payload: data.notes,
+          });
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    } else if (archiveExists) {
+      try {
+        const { data, status } = await editArchiveService(
+          { ...archiveExists, title: input.title, content: input.content },
+          token
+        );
+
+        if (status === 201) {
+          dispatchNote({
+            type: "SET_ARCHIVED",
+            payload: data.archives,
+          });
         }
       } catch (err) {
         console.error(err);
@@ -66,8 +93,12 @@ const NotesProvider = ({ children }) => {
           },
           token
         );
+
         if (status === 201) {
-          dispatchNote({ type: "SET_NOTES", payload: data.notes });
+          dispatchNote({
+            type: "SET_NOTES",
+            payload: data.notes,
+          });
         }
       } catch (err) {
         console.error(err);
@@ -94,6 +125,7 @@ const NotesProvider = ({ children }) => {
         setShowInput,
         submitForm,
         noteExists,
+        archiveExists,
         closeNote,
       }}
     >

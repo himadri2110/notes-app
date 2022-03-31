@@ -22,7 +22,7 @@ const NoteCard = ({ note }) => {
 
   const { archiveNote, unArchiveNote } = useArchive();
 
-  const inArchive = archives.find((eachNote) => eachNote._id === note._id);
+  const inArchive = archives?.find((eachNote) => eachNote._id === note._id);
 
   const changeBg = (e) => {
     e.stopPropagation();

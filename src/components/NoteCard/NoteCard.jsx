@@ -44,7 +44,9 @@ const NoteCard = ({ note }) => {
         <div className="card-text">
           <div className="card-heading">{title}</div>
           <div className="card-content">{content}</div>
-          {tags && <div className="card-label">{tags[0]} </div>}
+          {tags.length > 0 ? (
+            <div className="card-label">{tags[0]} </div>
+          ) : null}
         </div>
 
         <div className="card-badge">

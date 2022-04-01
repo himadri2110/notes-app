@@ -24,7 +24,7 @@ const Label = () => {
   return (
     <div className="component-container">
       {tagsArray.length > 0 ? (
-        tagsArray.map((tag) => {
+        tagsArray?.map((tag) => {
           return (
             <div className="label-wrapper">
               <h2>{tag}</h2>

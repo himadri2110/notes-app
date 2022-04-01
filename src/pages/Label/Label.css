@@ -1,0 +1,8 @@
+.component-container .label-wrapper {
+  max-width: 25rem;
+  margin: 0 auto;
+}
+
+.label-wrapper > * {
+  width: 100%;
+}

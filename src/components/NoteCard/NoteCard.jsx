@@ -2,7 +2,6 @@ import "./NoteCard.css";
 import { useState } from "react";
 import {
   ColorLensOutlinedIcon,
-  LabelOutlinedIcon,
   ArchiveOutlinedIcon,
   UnarchiveOutlinedIcon,
   DeleteOutlinedIcon,
@@ -12,7 +11,7 @@ import {
 import { useArchive, useNotes } from "contexts";
 
 const NoteCard = ({ note }) => {
-  const { _id, title, content, createdTime } = note;
+  const { _id, title, content, tags, createdTime } = note;
   const [showCardOptions, setShowCardOptions] = useState(false);
   const {
     noteState: { archives },
@@ -45,6 +44,7 @@ const NoteCard = ({ note }) => {
         <div className="card-text">
           <div className="card-heading">{title}</div>
           <div className="card-content">{content}</div>
+          {tags && <div className="card-label">{tags[0]} </div>}
         </div>
 
         <div className="card-badge">
@@ -66,9 +66,6 @@ const NoteCard = ({ note }) => {
         <div className="card-icons">
           <i role="button" onClick={changeBg}>
             <ColorLensOutlinedIcon />
-          </i>
-          <i role="button">
-            <LabelOutlinedIcon />
           </i>
           <i role="button">
             {inArchive ? (

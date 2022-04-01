@@ -19,6 +19,7 @@ const NotesContext = createContext();
 const formInputs = {
   title: "",
   content: "",
+  tags: [],
 };
 
 const NotesProvider = ({ children }) => {
@@ -30,6 +31,7 @@ const NotesProvider = ({ children }) => {
     archives: [],
   });
   const [showInput, setShowInput] = useState(false);
+  const [tagsArray, setTagsArray] = useState([]);
 
   const noteExists = noteState.notes?.find((note) => note._id === input._id);
   const archiveExists = noteState.archives?.find(
@@ -54,7 +56,12 @@ const NotesProvider = ({ children }) => {
     if (noteExists) {
       try {
         const { data, status } = await editNoteService(
-          { ...noteExists, title: input.title, content: input.content },
+          {
+            ...noteExists,
+            title: input.title.trim(),
+            content: input.content.trim(),
+            tags: input.tags,
+          },
           token
         );
 
@@ -70,7 +77,12 @@ const NotesProvider = ({ children }) => {
     } else if (archiveExists) {
       try {
         const { data, status } = await editArchiveService(
-          { ...archiveExists, title: input.title, content: input.content },
+          {
+            ...archiveExists,
+            title: input.title.trim(),
+            content: input.content.trim(),
+            tags: input.tags,
+          },
           token
         );
 
@@ -88,6 +100,7 @@ const NotesProvider = ({ children }) => {
         const { data, status } = await addNoteService(
           {
             ...input,
+            tags: input.tags,
             isPinned: false,
             createdTime: new Date().toLocaleString(),
           },
@@ -127,6 +140,8 @@ const NotesProvider = ({ children }) => {
         noteExists,
         archiveExists,
         closeNote,
+        tagsArray,
+        setTagsArray,
       }}
     >
       {children}

@@ -1,5 +1,6 @@
-import { useNotes } from "../../contexts";
 import "./NoteInput.css";
+import { useNotes } from "../../contexts";
+import { ColorLensOutlinedIcon, LabelOutlinedIcon } from "assets/index";
 
 const NoteInput = () => {
   const { input, setInput, noteExists, archiveExists, submitForm, closeNote } =
@@ -15,9 +16,7 @@ const NoteInput = () => {
             type="text"
             placeholder="Title"
             value={input.title}
-            onChange={(e) =>
-              setInput({ ...input, title: e.target.value.trim() })
-            }
+            onChange={(e) => setInput({ ...input, title: e.target.value })}
             autoFocus
           />
         </div>
@@ -27,10 +26,22 @@ const NoteInput = () => {
             type="text"
             placeholder="Take a note..."
             value={input.content}
-            onChange={(e) =>
-              setInput({ ...input, content: e.target.value.trim() })
-            }
+            onChange={(e) => setInput({ ...input, content: e.target.value })}
           />
+        </div>
+
+        <div className="form-options">
+          <i role="button">
+            <ColorLensOutlinedIcon />
+          </i>
+          <div className=" input input-primary">
+            <input
+              type="text"
+              placeholder="Add a label"
+              value={input.tags}
+              onChange={(e) => setInput({ ...input, tags: [e.target.value] })}
+            />
+          </div>
         </div>
 
         <div className="form-action">

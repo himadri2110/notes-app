@@ -56,3 +56,25 @@
 .note-form .form-action button.primary-disabled {
   background-color: var(--primary-disabled);
 }
+
+.note-form .form-options {
+  display: flex;
+  align-items: center;
+}
+
+i > svg {
+  vertical-align: middle;
+}
+
+.form-options i {
+  margin: 0 0.5rem;
+  color: var(--status-offline);
+}
+
+.form-options i > * {
+  font-size: 1.3rem;
+}
+
+.note-form .label-btn {
+  position: relative;
+}

@@ -109,3 +109,27 @@ export const updateArchiveNoteHandler = function (schema, request) {
     );
   }
 };
+
+/**
+ * This handler handles trashing the archived notes to user notes.
+ * send POST Request at /api/archives/trash/:noteId
+ * */
+
+export const trashFromArchivesHandler = function (schema, request) {
+  const user = requiresAuth.call(this, request);
+  if (!user) {
+    new Response(
+      404,
+      {},
+      {
+        errors: ["The email you entered is not Registered. Not Found error"],
+      }
+    );
+  }
+  const { noteId } = request.params;
+  const trashedNote = user.archives.filter((note) => note._id === noteId)[0];
+  user.archives = user.archives.filter((note) => note._id !== noteId);
+  user.trash.push({ ...trashedNote });
+  this.db.users.update({ _id: user._id }, user);
+  return new Response(200, {}, { archives: user.archives, trash: user.trash });
+};

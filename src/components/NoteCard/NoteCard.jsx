@@ -42,7 +42,7 @@ const NoteCard = ({ note }) => {
       className="card-wrapper card-w-badge note-card"
       onMouseOver={() => setShowCardOptions((show) => !show)}
       onMouseOut={() => setShowCardOptions((show) => !show)}
-      onClick={editNote}
+      onClick={!inTrash && editNote}
     >
       <div className="card-body">
         <div className="card-text">

@@ -27,7 +27,7 @@ const Label = () => {
         tagsArray?.map((tag) => {
           return (
             <div className="label-wrapper">
-              <h4>{tag}</h4>
+              <h4>{tag.toUpperCase()}</h4>
               <NoteList notes={notes.filter((note) => note.tags[0] === tag)} />
             </div>
           );

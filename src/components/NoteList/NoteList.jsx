@@ -10,9 +10,7 @@ const NoteList = ({ notes }) => {
             return <NoteCard note={unPinnedNote} key={unPinnedNote._id} />;
           })
         ) : (
-          <p className="text-center">
-            No notes to display. Start taking notes!
-          </p>
+          <p className="text-center">We don't have any notes to show here.</p>
         )}
       </div>
     </div>

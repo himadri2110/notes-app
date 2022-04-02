@@ -4,6 +4,7 @@ import {
   getAllArchivedNotesHandler,
   restoreFromArchivesHandler,
   updateArchiveNoteHandler,
+  trashFromArchivesHandler,
 } from "./backend/controllers/ArchiveController";
 import {
   loginHandler,
@@ -44,6 +45,7 @@ export function makeServer({ environment = "development" } = {}) {
           ...item,
           notes: [],
           archives: [],
+          trash: [],
         })
       );
     },
@@ -72,6 +74,7 @@ export function makeServer({ environment = "development" } = {}) {
         deleteFromArchivesHandler.bind(this)
       );
       this.post("/archives/:noteId", updateArchiveNoteHandler.bind(this));
+      this.post("/archives/trash/:noteId", trashFromArchivesHandler.bind(this));
 
       // trash routes (private)
       this.get("/trash", getAllTrashedNotesHandler.bind(this));

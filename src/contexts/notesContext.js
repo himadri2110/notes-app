@@ -29,6 +29,7 @@ const NotesProvider = ({ children }) => {
   const [noteState, dispatchNote] = useReducer(noteReducer, {
     notes: [],
     archives: [],
+    trash: [],
   });
   const [showInput, setShowInput] = useState(false);
   const [tagsArray, setTagsArray] = useState([]);

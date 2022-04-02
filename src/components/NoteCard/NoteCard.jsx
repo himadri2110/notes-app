@@ -7,21 +7,25 @@ import {
   DeleteOutlinedIcon,
   PushPinIcon,
   PushPinOutlinedIcon,
+  RestoreFromTrashOutlinedIcon,
+  DeleteForeverOutlinedIcon,
 } from "assets/index";
-import { useArchive, useNotes } from "contexts";
+import { useArchive, useNotes, useTrash } from "contexts";
 
 const NoteCard = ({ note }) => {
   const { _id, title, content, tags, createdTime } = note;
   const [showCardOptions, setShowCardOptions] = useState(false);
+
   const {
-    noteState: { archives },
+    noteState: { archives, trash },
     setShowInput,
     setInput,
   } = useNotes();
-
-  const { archiveNote, unArchiveNote } = useArchive();
+  const { archiveNote, unArchiveNote, archivesToTrash } = useArchive();
+  const { moveToTrash, restoreFromTrash, deleteFromTrash } = useTrash();
 
   const inArchive = archives?.find((eachNote) => eachNote._id === note._id);
+  const inTrash = trash?.find((eachNote) => eachNote._id === note._id);
 
   const changeBg = (e) => {
     e.stopPropagation();
@@ -69,15 +73,36 @@ const NoteCard = ({ note }) => {
           <i role="button" onClick={changeBg}>
             <ColorLensOutlinedIcon />
           </i>
+          {!inTrash && (
+            <i role="button">
+              {inArchive ? (
+                <UnarchiveOutlinedIcon
+                  onClick={(e) => unArchiveNote(e, note)}
+                />
+              ) : (
+                <ArchiveOutlinedIcon onClick={(e) => archiveNote(e, note)} />
+              )}
+            </i>
+          )}
           <i role="button">
-            {inArchive ? (
-              <UnarchiveOutlinedIcon onClick={(e) => unArchiveNote(e, note)} />
+            {inTrash ? (
+              <RestoreFromTrashOutlinedIcon
+                onClick={(e) => restoreFromTrash(e, note)}
+              />
             ) : (
-              <ArchiveOutlinedIcon onClick={(e) => archiveNote(e, note)} />
+              <DeleteOutlinedIcon
+                onClick={(e) =>
+                  inArchive ? archivesToTrash(e, note) : moveToTrash(e, note)
+                }
+              />
             )}
           </i>
           <i role="button">
-            <DeleteOutlinedIcon />
+            {inTrash && (
+              <DeleteForeverOutlinedIcon
+                onClick={(e) => deleteFromTrash(e, note)}
+              />
+            )}
           </i>
         </div>
       </div>

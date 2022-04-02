@@ -6,3 +6,7 @@
 .label-wrapper > * {
   width: 100%;
 }
+
+.label-wrapper h4 {
+  text-transform: uppercase;
+}

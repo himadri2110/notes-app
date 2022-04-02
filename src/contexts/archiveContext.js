@@ -4,6 +4,7 @@ import {
   getArchivedService,
   archiveNoteService,
   unArchiveNoteService,
+  archivesToTrashService,
 } from "services";
 
 const ArchiveContext = createContext();
@@ -58,8 +59,26 @@ const ArchiveProvider = ({ children }) => {
     }
   };
 
+  const archivesToTrash = async (e, note) => {
+    e.stopPropagation();
+
+    try {
+      const { data, status } = await archivesToTrashService(note, token);
+
+      if (status === 200) {
+        dispatchNote({
+          type: "SET_ARCHIVE_AND_TRASH",
+          payload: { archives: data.archives, trash: data.trash },
+        });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
-    <ArchiveContext.Provider value={{ archiveNote, unArchiveNote }}>
+    <ArchiveContext.Provider
+      value={{ archiveNote, unArchiveNote, archivesToTrash }}
+    >
       {children}
     </ArchiveContext.Provider>
   );

@@ -6,6 +6,8 @@ import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import UnarchiveOutlinedIcon from "@mui/icons-material/UnarchiveOutlined";
+import RestoreFromTrashOutlinedIcon from "@mui/icons-material/RestoreFromTrashOutlined";
+import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 
 export {
   PushPinIcon,
@@ -16,4 +18,6 @@ export {
   UnarchiveOutlinedIcon,
   HomeOutlinedIcon,
   DeleteOutlinedIcon,
+  RestoreFromTrashOutlinedIcon,
+  DeleteForeverOutlinedIcon,
 };

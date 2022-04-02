@@ -9,7 +9,7 @@ const Archive = () => {
   } = useNotes();
 
   return (
-    <div className="component-container rchive-container">
+    <div className="component-container archive-container">
       <NoteList notes={archives} />
       {showInput ? <NoteInput /> : null}
     </div>

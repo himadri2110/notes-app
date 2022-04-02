@@ -3,7 +3,12 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { makeServer } from "./server";
 import { BrowserRouter as Router } from "react-router-dom";
-import { ArchiveProvider, AuthProvider, NotesProvider } from "./contexts";
+import {
+  ArchiveProvider,
+  AuthProvider,
+  NotesProvider,
+  TrashProvider,
+} from "contexts";
 
 // Call make Server
 makeServer();
@@ -14,7 +19,9 @@ ReactDOM.render(
       <AuthProvider>
         <NotesProvider>
           <ArchiveProvider>
-            <App />
+            <TrashProvider>
+              <App />
+            </TrashProvider>
           </ArchiveProvider>
         </NotesProvider>
       </AuthProvider>

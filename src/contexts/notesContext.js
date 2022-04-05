@@ -21,6 +21,7 @@ const formInputs = {
   content: "<p><br></p>",
   tags: [],
   bgColor: "#F5F5F5",
+  priority: "",
 };
 
 const NotesProvider = ({ children }) => {
@@ -35,6 +36,7 @@ const NotesProvider = ({ children }) => {
   const [showInput, setShowInput] = useState(false);
   const [tagsArray, setTagsArray] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
+  const [notesOrder, setNotesOrder] = useState({ sort: null, filter: null });
 
   const noteExists = noteState.notes?.find((note) => note._id === input._id);
   const archiveExists = noteState.archives?.find(
@@ -53,7 +55,7 @@ const NotesProvider = ({ children }) => {
     }
   }, [token]);
 
-  const updateColorHandler = async (currentNote) => {
+  const updateNoteHandler = async (currentNote) => {
     try {
       const { data, status } = await editNoteService(
         {
@@ -62,6 +64,7 @@ const NotesProvider = ({ children }) => {
           content: currentNote.content.trim(),
           tags: currentNote.tags,
           bgColor: currentNote.bgColor,
+          priority: currentNote.priority,
         },
         token
       );
@@ -88,6 +91,7 @@ const NotesProvider = ({ children }) => {
             content: input.content.trim(),
             tags: input.tags,
             bgColor: input.bgColor,
+            priority: input.priority,
           },
           token
         );
@@ -110,6 +114,7 @@ const NotesProvider = ({ children }) => {
             content: input.content.trim(),
             tags: input.tags,
             bgColor: input.bgColor,
+            priority: input.priority,
           },
           token
         );
@@ -130,7 +135,7 @@ const NotesProvider = ({ children }) => {
             ...input,
             tags: input.tags,
             bgColor: input.bgColor,
-            isPinned: false,
+            priority: input.priority,
             createdTime: new Date().toLocaleString(),
           },
           token
@@ -173,7 +178,9 @@ const NotesProvider = ({ children }) => {
         setTagsArray,
         isEditing,
         setIsEditing,
-        updateColorHandler,
+        updateNoteHandler,
+        notesOrder,
+        setNotesOrder,
       }}
     >
       {children}

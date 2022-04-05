@@ -25,7 +25,7 @@ const colorData = [
 ];
 
 const ColorPallete = ({ note, setInput }) => {
-  const { input, isEditing, updateColorHandler } = useNotes();
+  const { input, isEditing, updateNoteHandler } = useNotes();
 
   return (
     <div className="color-pallete">
@@ -39,7 +39,7 @@ const ColorPallete = ({ note, setInput }) => {
             e.stopPropagation();
             isEditing
               ? setInput({ ...input, bgColor: colors.color })
-              : updateColorHandler({ ...note, bgColor: colors.color });
+              : updateNoteHandler({ ...note, bgColor: colors.color });
           }}
         ></button>
       ))}

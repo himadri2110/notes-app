@@ -8,6 +8,9 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import UnarchiveOutlinedIcon from "@mui/icons-material/UnarchiveOutlined";
 import RestoreFromTrashOutlinedIcon from "@mui/icons-material/RestoreFromTrashOutlined";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import TuneIcon from "@mui/icons-material/Tune";
+import SortIcon from "@mui/icons-material/Sort";
 
 export {
   PushPinIcon,
@@ -20,4 +23,7 @@ export {
   DeleteOutlinedIcon,
   RestoreFromTrashOutlinedIcon,
   DeleteForeverOutlinedIcon,
+  BarChartIcon,
+  TuneIcon,
+  SortIcon,
 };

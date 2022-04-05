@@ -5,3 +5,5 @@ export { Sidebar } from "./Sidebar/Sidebar";
 export { NoteInput } from "./NoteInput/NoteInput";
 export { NoteCard } from "./NoteCard/NoteCard";
 export { RichTextEditor } from "./RichTextEditor/RichTextEditor";
+export { PriorityField } from "./PriorityField/PriorityField";
+export { SortModal } from "./SortModal/SortModal";

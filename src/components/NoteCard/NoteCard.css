@@ -37,7 +37,13 @@
 
 .note-card.card-w-badge .card-badge {
   all: unset;
-  padding: 0.75rem 0.75rem 0 0;
+  margin: 0.75rem 0.75rem 0 0;
+  padding: 0.1rem;
+  font-size: 0.7rem;
+  height: max-content;
+  color: var(--text-secondary);
+  border: 1px solid var(--text-color);
+  border-radius: var(--border-radius);
 }
 
 .note-card .card-action {
@@ -65,7 +71,8 @@
   font-size: 1.2rem;
 }
 
-.note-card .color-pallete-wrapper {
+.note-card .color-pallete-wrapper,
+.note-card .priority-field-wrapper {
   bottom: 0;
   left: 0;
 }

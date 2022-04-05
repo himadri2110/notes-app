@@ -11,15 +11,18 @@ import {
   DeleteForeverOutlinedIcon,
 } from "assets/index";
 import { useArchive, useNotes, useTrash } from "contexts";
+import { ColorPallete } from "components";
 
 const NoteCard = ({ note }) => {
-  const { _id, title, content, tags, createdTime } = note;
+  const { _id, title, content, tags, createdTime, bgColor } = note;
   const [showCardOptions, setShowCardOptions] = useState(false);
+  const [showColorPallete, setShowColorPallete] = useState(false);
 
   const {
     noteState: { archives, trash },
     setShowInput,
     setInput,
+    setIsEditing,
   } = useNotes();
   const { archiveNote, unArchiveNote, archivesToTrash } = useArchive();
   const { moveToTrash, restoreFromTrash, deleteFromTrash } = useTrash();
@@ -27,13 +30,10 @@ const NoteCard = ({ note }) => {
   const inArchive = archives?.find((eachNote) => eachNote._id === note._id);
   const inTrash = trash?.find((eachNote) => eachNote._id === note._id);
 
-  const changeBg = (e) => {
-    e.stopPropagation();
-  };
-
   const editNote = () => {
     setShowInput(true);
     setInput(note);
+    setIsEditing(true);
   };
 
   return (
@@ -43,11 +43,15 @@ const NoteCard = ({ note }) => {
       onMouseOver={() => setShowCardOptions((show) => !show)}
       onMouseOut={() => setShowCardOptions((show) => !show)}
       onClick={!inTrash && editNote}
+      style={{ backgroundColor: bgColor }}
     >
       <div className="card-body">
         <div className="card-text">
           <div className="card-heading">{title}</div>
-          <div className="card-content">{content}</div>
+          <div
+            className="card-content"
+            dangerouslySetInnerHTML={{ __html: content }}
+          ></div>
           {tags.length > 0 ? (
             <div className="card-label">{tags[0]} </div>
           ) : null}
@@ -70,7 +74,13 @@ const NoteCard = ({ note }) => {
         <div className="card-time">{createdTime}</div>
 
         <div className="card-icons">
-          <i role="button" onClick={changeBg}>
+          <i
+            role="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowColorPallete((show) => !show);
+            }}
+          >
             <ColorLensOutlinedIcon />
           </i>
           {!inTrash && (
@@ -97,14 +107,17 @@ const NoteCard = ({ note }) => {
               />
             )}
           </i>
-          <i role="button">
-            {inTrash && (
+          {inTrash && (
+            <i role="button">
               <DeleteForeverOutlinedIcon
                 onClick={(e) => deleteFromTrash(e, note)}
               />
-            )}
-          </i>
+            </i>
+          )}
         </div>
+      </div>
+      <div className="color-pallete-wrapper">
+        {showColorPallete ? <ColorPallete note={note} /> : null}
       </div>
     </div>
   );

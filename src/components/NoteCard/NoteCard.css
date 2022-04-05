@@ -12,6 +12,7 @@
 
 .note-card:active {
   transform: scale(0.98);
+  z-index: 1;
 }
 
 .note-card .card-body {
@@ -62,4 +63,14 @@
 .note-card .card-icons i > *,
 .note-card .card-badge i > * {
   font-size: 1.2rem;
+}
+
+.note-card .color-pallete-wrapper {
+  bottom: 0;
+  left: 0;
+}
+
+.note-card .card-content p img {
+  width: 100%;
+  height: auto;
 }

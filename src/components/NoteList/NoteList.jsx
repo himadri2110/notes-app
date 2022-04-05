@@ -1,4 +1,4 @@
-import { NoteCard } from "../NoteCard/NoteCard";
+import { NoteCard } from "components";
 import "./NoteList.css";
 
 const NoteList = ({ notes }) => {

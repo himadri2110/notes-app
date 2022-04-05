@@ -18,8 +18,9 @@ const NotesContext = createContext();
 
 const formInputs = {
   title: "",
-  content: "",
+  content: "<p><br></p>",
   tags: [],
+  bgColor: "#F5F5F5",
 };
 
 const NotesProvider = ({ children }) => {
@@ -33,6 +34,7 @@ const NotesProvider = ({ children }) => {
   });
   const [showInput, setShowInput] = useState(false);
   const [tagsArray, setTagsArray] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
 
   const noteExists = noteState.notes?.find((note) => note._id === input._id);
   const archiveExists = noteState.archives?.find(
@@ -51,9 +53,32 @@ const NotesProvider = ({ children }) => {
     }
   }, [token]);
 
+  const updateColorHandler = async (currentNote) => {
+    try {
+      const { data, status } = await editNoteService(
+        {
+          ...currentNote,
+          title: currentNote.title.trim(),
+          content: currentNote.content.trim(),
+          tags: currentNote.tags,
+          bgColor: currentNote.bgColor,
+        },
+        token
+      );
+
+      if (status === 201) {
+        dispatchNote({
+          type: "SET_NOTES",
+          payload: data.notes,
+        });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const submitForm = async (e) => {
     e.preventDefault();
-
     if (noteExists) {
       try {
         const { data, status } = await editNoteService(
@@ -62,6 +87,7 @@ const NotesProvider = ({ children }) => {
             title: input.title.trim(),
             content: input.content.trim(),
             tags: input.tags,
+            bgColor: input.bgColor,
           },
           token
         );
@@ -83,6 +109,7 @@ const NotesProvider = ({ children }) => {
             title: input.title.trim(),
             content: input.content.trim(),
             tags: input.tags,
+            bgColor: input.bgColor,
           },
           token
         );
@@ -102,6 +129,7 @@ const NotesProvider = ({ children }) => {
           {
             ...input,
             tags: input.tags,
+            bgColor: input.bgColor,
             isPinned: false,
             createdTime: new Date().toLocaleString(),
           },
@@ -118,13 +146,13 @@ const NotesProvider = ({ children }) => {
         console.error(err);
       }
     }
-
     closeNote();
   };
 
   const closeNote = () => {
     setInput(formInputs);
     setShowInput(false);
+    setIsEditing(false);
   };
 
   return (
@@ -143,6 +171,9 @@ const NotesProvider = ({ children }) => {
         closeNote,
         tagsArray,
         setTagsArray,
+        isEditing,
+        setIsEditing,
+        updateColorHandler,
       }}
     >
       {children}

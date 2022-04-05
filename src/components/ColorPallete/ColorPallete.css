@@ -1,0 +1,28 @@
+.color-pallete {
+  position: absolute;
+  bottom: -3.5rem;
+  left: -0.5rem;
+  background-color: var(--bg-app);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  box-shadow: var(--box-shadow);
+  z-index: 2;
+}
+
+.color-pallete .btn {
+  margin-bottom: 0.25rem;
+}
+
+.btn-color {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--text-secondary);
+  margin: 0.25rem;
+  padding: 0;
+}

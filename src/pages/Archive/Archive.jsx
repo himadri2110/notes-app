@@ -1,6 +1,5 @@
-import { NoteList } from "components/NoteList/NoteList";
+import { NoteList, NoteInput } from "components";
 import { useNotes } from "contexts";
-import { NoteInput } from "components/";
 
 const Archive = () => {
   const {

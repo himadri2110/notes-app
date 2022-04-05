@@ -1,0 +1,22 @@
+.quill {
+  font-family: "Poppins", sans-serif;
+}
+
+.quill .ql-toolbar {
+  display: flex;
+  border: none;
+}
+
+.quill .ql-formats button {
+  margin-bottom: 0;
+}
+
+.quill .ql-editor {
+  font-size: 1rem;
+}
+
+.quill .ql-editor img {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+}

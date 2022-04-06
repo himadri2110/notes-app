@@ -1,13 +1,14 @@
 import "./NoteInput.css";
 import { useNotes } from "contexts";
-import { ColorLensOutlinedIcon, LabelOutlinedIcon } from "assets/index";
-import { ColorPallete, RichTextEditor } from "components";
+import { ColorLensOutlinedIcon, BarChartIcon } from "assets/index";
+import { ColorPallete, PriorityField, RichTextEditor } from "components";
 import { useState } from "react";
 
 const NoteInput = () => {
   const { input, setInput, noteExists, archiveExists, submitForm, closeNote } =
     useNotes();
   const [showColorPallete, setShowColorPallete] = useState(false);
+  const [showPriorityField, setShowPriorityField] = useState(false);
 
   const buttonDisabled = !input.title && input.content === "<p><br></p>";
 
@@ -52,6 +53,12 @@ const NoteInput = () => {
             >
               <ColorLensOutlinedIcon />
             </i>
+            <i
+              role="button"
+              onClick={() => setShowPriorityField((show) => !show)}
+            >
+              <BarChartIcon />
+            </i>
           </div>
 
           <div className="form-action">
@@ -72,6 +79,7 @@ const NoteInput = () => {
             </button>
           </div>
           {showColorPallete ? <ColorPallete setInput={setInput} /> : null}
+          {showPriorityField ? <PriorityField /> : null}
         </div>
       </form>
     </div>

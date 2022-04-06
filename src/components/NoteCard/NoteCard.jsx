@@ -5,18 +5,18 @@ import {
   ArchiveOutlinedIcon,
   UnarchiveOutlinedIcon,
   DeleteOutlinedIcon,
-  PushPinIcon,
-  PushPinOutlinedIcon,
   RestoreFromTrashOutlinedIcon,
   DeleteForeverOutlinedIcon,
+  BarChartIcon,
 } from "assets/index";
 import { useArchive, useNotes, useTrash } from "contexts";
-import { ColorPallete } from "components";
+import { ColorPallete, PriorityField } from "components";
 
 const NoteCard = ({ note }) => {
-  const { _id, title, content, tags, createdTime, bgColor } = note;
+  const { _id, title, content, tags, createdTime, bgColor, priority } = note;
   const [showCardOptions, setShowCardOptions] = useState(false);
   const [showColorPallete, setShowColorPallete] = useState(false);
+  const [showPriorityField, setShowPriorityField] = useState(false);
 
   const {
     noteState: { archives, trash },
@@ -57,14 +57,9 @@ const NoteCard = ({ note }) => {
           ) : null}
         </div>
 
-        <div className="card-badge">
-          <i
-            role="button"
-            style={{ visibility: showCardOptions ? "visible" : "hidden" }}
-          >
-            <PushPinOutlinedIcon />
-          </i>
-        </div>
+        {priority ? (
+          <div className="card-badge">{Object.keys(priority)[0]}</div>
+        ) : null}
       </div>
 
       <div
@@ -78,10 +73,21 @@ const NoteCard = ({ note }) => {
             role="button"
             onClick={(e) => {
               e.stopPropagation();
+              setShowPriorityField(false);
               setShowColorPallete((show) => !show);
             }}
           >
             <ColorLensOutlinedIcon />
+          </i>
+          <i
+            role="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowColorPallete(false);
+              setShowPriorityField((show) => !show);
+            }}
+          >
+            <BarChartIcon />
           </i>
           {!inTrash && (
             <i role="button">
@@ -118,6 +124,9 @@ const NoteCard = ({ note }) => {
       </div>
       <div className="color-pallete-wrapper">
         {showColorPallete ? <ColorPallete note={note} /> : null}
+      </div>
+      <div className="priority-field-wrapper">
+        {showPriorityField ? <PriorityField note={note} /> : null}
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect } from "react";
+import toast from "react-hot-toast";
 import { useAuth, useNotes } from "contexts";
 import {
   getArchivedService,
@@ -36,6 +37,7 @@ const ArchiveProvider = ({ children }) => {
       const { data, status } = await archiveNoteService(note, token);
 
       if (status === 201) {
+        toast.success("Note archived");
         dispatchNote({
           type: SET_NOTES_AND_ARCHIVE,
           payload: { notes: data.notes, archives: data.archives },
@@ -53,6 +55,7 @@ const ArchiveProvider = ({ children }) => {
       const { data, status } = await unArchiveNoteService(note, token);
 
       if (status === 200) {
+        toast.success("Note unarchived");
         dispatchNote({
           type: SET_NOTES_AND_ARCHIVE,
           payload: { notes: data.notes, archives: data.archives },
@@ -70,6 +73,7 @@ const ArchiveProvider = ({ children }) => {
       const { data, status } = await archivesToTrashService(note, token);
 
       if (status === 200) {
+        toast.success("Note moved to Trash");
         dispatchNote({
           type: SET_ARCHIVE_AND_TRASH,
           payload: { archives: data.archives, trash: data.trash },

@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect } from "react";
+import toast from "react-hot-toast";
 import { useAuth, useNotes } from "contexts";
 import {
   getTrashService,
@@ -35,6 +36,7 @@ const TrashProvider = ({ children }) => {
       const { data, status } = await moveToTrashService(note, token);
 
       if (status === 201) {
+        toast.success("Note moved to Trash");
         dispatchNote({
           type: SET_NOTES_AND_TRASH,
           payload: { notes: data.notes, trash: data.trash },
@@ -52,6 +54,7 @@ const TrashProvider = ({ children }) => {
       const { data, status } = await restoreFromTrashService(note, token);
 
       if (status === 200) {
+        toast.success("Note restored");
         dispatchNote({
           type: SET_NOTES_AND_TRASH,
           payload: { notes: data.notes, trash: data.trash },
@@ -69,6 +72,7 @@ const TrashProvider = ({ children }) => {
       const { data, status } = await deleteFromTrashService(note, token);
 
       if (status === 200) {
+        toast.success("Note deleted permanently");
         dispatchNote({
           type: SET_TRASH,
           payload: data.trash,

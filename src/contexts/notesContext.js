@@ -5,6 +5,7 @@ import {
   useEffect,
   useReducer,
 } from "react";
+import toast from "react-hot-toast";
 import { noteReducer } from "reducers/noteReducer";
 import { useAuth } from "contexts";
 import {
@@ -73,6 +74,7 @@ const NotesProvider = ({ children }) => {
       );
 
       if (status === 201) {
+        toast.success("Note updated");
         dispatchNote({
           type: SET_NOTES,
           payload: data.notes,
@@ -100,6 +102,7 @@ const NotesProvider = ({ children }) => {
         );
 
         if (status === 201) {
+          toast.success("Note edited");
           dispatchNote({
             type: SET_NOTES,
             payload: data.notes,
@@ -123,6 +126,7 @@ const NotesProvider = ({ children }) => {
         );
 
         if (status === 201) {
+          toast.success("Note edited");
           dispatchNote({
             type: SET_ARCHIVED,
             payload: data.archives,
@@ -145,6 +149,7 @@ const NotesProvider = ({ children }) => {
         );
 
         if (status === 201) {
+          toast.success("Note added");
           dispatchNote({
             type: SET_NOTES,
             payload: data.notes,

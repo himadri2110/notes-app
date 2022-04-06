@@ -21,7 +21,7 @@ const formInputs = {
   content: "<p><br></p>",
   tags: [],
   bgColor: "#F5F5F5",
-  priority: "",
+  priority: { Low: "1" },
 };
 
 const NotesProvider = ({ children }) => {

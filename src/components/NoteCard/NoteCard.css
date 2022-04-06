@@ -62,8 +62,15 @@
 
 .note-card .card-icons i,
 .note-card .card-badge i {
-  margin-left: 0.75rem;
+  margin: 0 0.35rem;
+  padding: 0.25rem;
+  border-radius: 50%;
   color: var(--status-offline);
+}
+
+.note-card .card-icons i:hover,
+.note-card .card-badge i:hover {
+  background-color: var(--bg-secondary);
 }
 
 .note-card .card-icons i > *,

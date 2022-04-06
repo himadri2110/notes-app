@@ -6,8 +6,12 @@ import {
   unArchiveNoteService,
   archivesToTrashService,
 } from "services";
+import { actionTypes } from "reducers/actionTypes";
 
 const ArchiveContext = createContext();
+
+const { SET_NOTES_AND_ARCHIVE, SET_ARCHIVE_AND_TRASH, SET_ARCHIVED } =
+  actionTypes;
 
 const ArchiveProvider = ({ children }) => {
   const { isAuth, token } = useAuth();
@@ -19,7 +23,7 @@ const ArchiveProvider = ({ children }) => {
         const { data, status } = await getArchivedService(token);
 
         if (status === 200) {
-          dispatchNote({ type: "SET_ARCHIVED", payload: data.archives });
+          dispatchNote({ type: SET_ARCHIVED, payload: data.archives });
         }
       })();
     }
@@ -33,7 +37,7 @@ const ArchiveProvider = ({ children }) => {
 
       if (status === 201) {
         dispatchNote({
-          type: "SET_NOTES_AND_ARCHIVE",
+          type: SET_NOTES_AND_ARCHIVE,
           payload: { notes: data.notes, archives: data.archives },
         });
       }
@@ -50,7 +54,7 @@ const ArchiveProvider = ({ children }) => {
 
       if (status === 200) {
         dispatchNote({
-          type: "SET_NOTES_AND_ARCHIVE",
+          type: SET_NOTES_AND_ARCHIVE,
           payload: { notes: data.notes, archives: data.archives },
         });
       }
@@ -67,7 +71,7 @@ const ArchiveProvider = ({ children }) => {
 
       if (status === 200) {
         dispatchNote({
-          type: "SET_ARCHIVE_AND_TRASH",
+          type: SET_ARCHIVE_AND_TRASH,
           payload: { archives: data.archives, trash: data.trash },
         });
       }
@@ -75,6 +79,7 @@ const ArchiveProvider = ({ children }) => {
       console.error(err);
     }
   };
+
   return (
     <ArchiveContext.Provider
       value={{ archiveNote, unArchiveNote, archivesToTrash }}

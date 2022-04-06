@@ -13,6 +13,7 @@ import {
   editNoteService,
   editArchiveService,
 } from "services";
+import { actionTypes } from "reducers/actionTypes";
 
 const NotesContext = createContext();
 
@@ -23,6 +24,8 @@ const formInputs = {
   bgColor: "#F5F5F5",
   priority: { Low: "1" },
 };
+
+const { SET_NOTES, SET_ARCHIVED } = actionTypes;
 
 const NotesProvider = ({ children }) => {
   const { isAuth, token } = useAuth();
@@ -49,7 +52,7 @@ const NotesProvider = ({ children }) => {
         const { data, status } = await getNoteService(token);
 
         if (status === 200) {
-          dispatchNote({ type: "SET_NOTES", payload: data.notes });
+          dispatchNote({ type: SET_NOTES, payload: data.notes });
         }
       })();
     }
@@ -71,7 +74,7 @@ const NotesProvider = ({ children }) => {
 
       if (status === 201) {
         dispatchNote({
-          type: "SET_NOTES",
+          type: SET_NOTES,
           payload: data.notes,
         });
       }
@@ -98,7 +101,7 @@ const NotesProvider = ({ children }) => {
 
         if (status === 201) {
           dispatchNote({
-            type: "SET_NOTES",
+            type: SET_NOTES,
             payload: data.notes,
           });
         }
@@ -121,7 +124,7 @@ const NotesProvider = ({ children }) => {
 
         if (status === 201) {
           dispatchNote({
-            type: "SET_ARCHIVED",
+            type: SET_ARCHIVED,
             payload: data.archives,
           });
         }
@@ -143,7 +146,7 @@ const NotesProvider = ({ children }) => {
 
         if (status === 201) {
           dispatchNote({
-            type: "SET_NOTES",
+            type: SET_NOTES,
             payload: data.notes,
           });
         }

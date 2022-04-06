@@ -6,8 +6,11 @@ import {
   restoreFromTrashService,
   deleteFromTrashService,
 } from "services";
+import { actionTypes } from "reducers/actionTypes";
 
 const TrashContext = createContext();
+
+const { SET_TRASH, SET_NOTES_AND_TRASH } = actionTypes;
 
 const TrashProvider = ({ children }) => {
   const { isAuth, token } = useAuth();
@@ -19,7 +22,7 @@ const TrashProvider = ({ children }) => {
         const { data, status } = await getTrashService(token);
 
         if (status === 201) {
-          dispatchNote({ type: "SET_TRASH", payload: data.trash });
+          dispatchNote({ type: SET_TRASH, payload: data.trash });
         }
       })();
     }
@@ -33,7 +36,7 @@ const TrashProvider = ({ children }) => {
 
       if (status === 201) {
         dispatchNote({
-          type: "SET_NOTES_AND_TRASH",
+          type: SET_NOTES_AND_TRASH,
           payload: { notes: data.notes, trash: data.trash },
         });
       }
@@ -50,7 +53,7 @@ const TrashProvider = ({ children }) => {
 
       if (status === 200) {
         dispatchNote({
-          type: "SET_NOTES_AND_TRASH",
+          type: SET_NOTES_AND_TRASH,
           payload: { notes: data.notes, trash: data.trash },
         });
       }
@@ -67,7 +70,7 @@ const TrashProvider = ({ children }) => {
 
       if (status === 200) {
         dispatchNote({
-          type: "SET_TRASH",
+          type: SET_TRASH,
           payload: data.trash,
         });
       }

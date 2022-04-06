@@ -69,6 +69,10 @@ aside .username {
     font-size: 0.9rem;
   }
 
+  aside i {
+    margin: 0;
+  }
+
   aside .profile {
     width: max-content;
   }

@@ -60,28 +60,60 @@ const NotesProvider = ({ children }) => {
   }, [token]);
 
   const updateNoteHandler = async (currentNote) => {
-    try {
-      const { data, status } = await editNoteService(
-        {
-          ...currentNote,
-          title: currentNote.title.trim(),
-          content: currentNote.content.trim(),
-          tags: currentNote.tags,
-          bgColor: currentNote.bgColor,
-          priority: currentNote.priority,
-        },
-        token
-      );
+    const archiveExists = noteState.archives?.find(
+      (note) => note._id === currentNote._id
+    );
 
-      if (status === 201) {
-        toast.success("Note updated");
-        dispatchNote({
-          type: SET_NOTES,
-          payload: data.notes,
-        });
+    if (archiveExists) {
+      try {
+        const { data, status } = await editArchiveService(
+          {
+            ...archiveExists,
+            title: currentNote.title.trim(),
+            content: currentNote.content.trim(),
+            tags: currentNote.tags,
+            bgColor: currentNote.bgColor,
+            priority: currentNote.priority,
+          },
+          token
+        );
+
+        if (status === 201) {
+          toast.success("Note edited");
+          dispatchNote({
+            type: SET_ARCHIVED,
+            payload: data.archives,
+          });
+        }
+      } catch (err) {
+        toast.error("Error occured");
+        console.error(err);
       }
-    } catch (err) {
-      console.error(err);
+    } else {
+      try {
+        const { data, status } = await editNoteService(
+          {
+            ...currentNote,
+            title: currentNote.title.trim(),
+            content: currentNote.content.trim(),
+            tags: currentNote.tags,
+            bgColor: currentNote.bgColor,
+            priority: currentNote.priority,
+          },
+          token
+        );
+
+        if (status === 201) {
+          toast.success("Note updated");
+          dispatchNote({
+            type: SET_NOTES,
+            payload: data.notes,
+          });
+        }
+      } catch (err) {
+        toast.error("Error occured");
+        console.error(err);
+      }
     }
   };
 
@@ -109,6 +141,7 @@ const NotesProvider = ({ children }) => {
           });
         }
       } catch (err) {
+        toast.error("Error occured");
         console.error(err);
       }
     } else if (archiveExists) {
@@ -133,6 +166,7 @@ const NotesProvider = ({ children }) => {
           });
         }
       } catch (err) {
+        toast.error("Error occured");
         console.error(err);
       }
     } else {
@@ -156,6 +190,7 @@ const NotesProvider = ({ children }) => {
           });
         }
       } catch (err) {
+        toast.error("Error occured");
         console.error(err);
       }
     }

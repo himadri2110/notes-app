@@ -44,6 +44,7 @@ const ArchiveProvider = ({ children }) => {
         });
       }
     } catch (err) {
+      toast.error("Error occured");
       console.error(err);
     }
   };
@@ -62,6 +63,7 @@ const ArchiveProvider = ({ children }) => {
         });
       }
     } catch (err) {
+      toast.error("Error occured");
       console.error(err);
     }
   };
@@ -80,6 +82,7 @@ const ArchiveProvider = ({ children }) => {
         });
       }
     } catch (err) {
+      toast.error("Error occured");
       console.error(err);
     }
   };

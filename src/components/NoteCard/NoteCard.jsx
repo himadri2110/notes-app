@@ -69,26 +69,30 @@ const NoteCard = ({ note }) => {
         <div className="card-time">{createdTime}</div>
 
         <div className="card-icons">
-          <i
-            role="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              setShowPriorityField(false);
-              setShowColorPallete((show) => !show);
-            }}
-          >
-            <ColorLensOutlinedIcon />
-          </i>
-          <i
-            role="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              setShowColorPallete(false);
-              setShowPriorityField((show) => !show);
-            }}
-          >
-            <BarChartIcon />
-          </i>
+          {!inTrash && (
+            <span>
+              <i
+                role="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowPriorityField(false);
+                  setShowColorPallete((show) => !show);
+                }}
+              >
+                <ColorLensOutlinedIcon />
+              </i>
+              <i
+                role="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowColorPallete(false);
+                  setShowPriorityField((show) => !show);
+                }}
+              >
+                <BarChartIcon />
+              </i>
+            </span>
+          )}
           {!inTrash && (
             <i role="button">
               {inArchive ? (

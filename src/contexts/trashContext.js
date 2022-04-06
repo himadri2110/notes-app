@@ -43,6 +43,7 @@ const TrashProvider = ({ children }) => {
         });
       }
     } catch (err) {
+      toast.error("Error occured");
       console.error(err);
     }
   };
@@ -61,6 +62,7 @@ const TrashProvider = ({ children }) => {
         });
       }
     } catch (err) {
+      toast.error("Error occured");
       console.error(err);
     }
   };
@@ -79,6 +81,7 @@ const TrashProvider = ({ children }) => {
         });
       }
     } catch (err) {
+      toast.error("Error occured");
       console.error(err);
     }
   };

@@ -48,6 +48,7 @@ const AuthProvider = ({ children }) => {
 
       navigate("/");
     } catch (err) {
+      toast.error("Error occured");
       setLogin({ ...login, error: err.response.data.errors[0] });
     }
   };

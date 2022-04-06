@@ -5,8 +5,6 @@ import {
   ArchiveOutlinedIcon,
   UnarchiveOutlinedIcon,
   DeleteOutlinedIcon,
-  PushPinIcon,
-  PushPinOutlinedIcon,
   RestoreFromTrashOutlinedIcon,
   DeleteForeverOutlinedIcon,
   BarChartIcon,
@@ -59,7 +57,9 @@ const NoteCard = ({ note }) => {
           ) : null}
         </div>
 
-        {priority ? <div className="card-badge">{priority}</div> : null}
+        {priority ? (
+          <div className="card-badge">{Object.keys(priority)[0]}</div>
+        ) : null}
       </div>
 
       <div
@@ -73,6 +73,7 @@ const NoteCard = ({ note }) => {
             role="button"
             onClick={(e) => {
               e.stopPropagation();
+              setShowPriorityField(false);
               setShowColorPallete((show) => !show);
             }}
           >
@@ -82,6 +83,7 @@ const NoteCard = ({ note }) => {
             role="button"
             onClick={(e) => {
               e.stopPropagation();
+              setShowColorPallete(false);
               setShowPriorityField((show) => !show);
             }}
           >

@@ -36,7 +36,7 @@ const NotesProvider = ({ children }) => {
   const [showInput, setShowInput] = useState(false);
   const [tagsArray, setTagsArray] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
-  const [notesOrder, setNotesOrder] = useState({ sort: null, filter: null });
+  const [notesOrder, setNotesOrder] = useState({ sort: "", filter: "" });
 
   const noteExists = noteState.notes?.find((note) => note._id === input._id);
   const archiveExists = noteState.archives?.find(

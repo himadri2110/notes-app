@@ -19,8 +19,11 @@ const PriorityField = ({ note }) => {
         <input
           type="radio"
           name="priority"
-          checked={input.priority === "low"}
-          onChange={() => handlePriority("low")}
+          value="1"
+          checked={
+            note ? note.priority.Low === "1" : input.priority.Low === "1"
+          }
+          onChange={(e) => handlePriority({ Low: e.target.value })}
         />{" "}
         Low
       </label>
@@ -28,8 +31,11 @@ const PriorityField = ({ note }) => {
         <input
           type="radio"
           name="priority"
-          checked={input.priority === "medium"}
-          onChange={() => handlePriority("medium")}
+          value="2"
+          checked={
+            note ? note.priority.Medium === "2" : input.priority.Medium === "2"
+          }
+          onChange={(e) => handlePriority({ Medium: e.target.value })}
         />{" "}
         Medium
       </label>
@@ -37,8 +43,11 @@ const PriorityField = ({ note }) => {
         <input
           type="radio"
           name="priority"
-          checked={input.priority === "high"}
-          onChange={() => handlePriority("high")}
+          value="3"
+          checked={
+            note ? note.priority.High === "3" : input.priority.High === "3"
+          }
+          onChange={(e) => handlePriority({ High: e.target.value })}
         />{" "}
         High
       </label>

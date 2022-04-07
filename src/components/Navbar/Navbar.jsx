@@ -2,7 +2,7 @@ import "./Navbar.css";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useNotes } from "contexts";
-import { FilterModal, SortModal } from "components";
+import { FilterModal, SortModal, SearchBar } from "components";
 import { TuneIcon } from "assets";
 
 const Navbar = () => {
@@ -17,6 +17,10 @@ const Navbar = () => {
       <Link to="/" className="nav-brand">
         Scribble
       </Link>
+
+      <div className="nav-search input input-primary">
+        <SearchBar />
+      </div>
 
       {location.pathname === "/" ? (
         <div className="nav-actions">

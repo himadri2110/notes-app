@@ -6,11 +6,14 @@ import {
   getNotesSortedByPriority,
   getNotesFilteredByPriority,
 } from "../../utils";
+import { useSearchedNotes } from "customHooks/useSearchedNotes";
 
 const NoteList = ({ notes }) => {
-  const { notesOrder } = useNotes();
+  const { notesOrder, searchVal } = useNotes();
 
-  const sortedByDate = getNotesSortedByDate(notes, notesOrder.sort);
+  const searhedNotes = useSearchedNotes(notes, searchVal);
+
+  const sortedByDate = getNotesSortedByDate(searhedNotes, notesOrder.sort);
   const sortedByPriority = getNotesSortedByPriority(
     sortedByDate,
     notesOrder.sort

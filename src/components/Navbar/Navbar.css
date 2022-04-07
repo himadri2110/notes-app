@@ -3,6 +3,19 @@
   background-color: var(--bg-app);
 }
 
+.nav-bar .nav-search > * {
+  font-size: 0.9rem;
+}
+
+.nav-search input {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--primary-color);
+}
+
+.nav-search input:focus {
+  border-width: 2px;
+}
+
 .nav-bar .nav-actions {
   display: flex;
   align-items: center;
@@ -56,7 +69,14 @@
   align-items: center;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 1000px) {
+  .nav-bar .nav-search {
+    flex-grow: initial;
+    order: initial;
+  }
+}
+
+@media screen and (max-width: 700px) {
   .nav-bar {
     padding: 0.5rem;
   }
@@ -68,5 +88,14 @@
 
   .nav-bar svg {
     font-size: 1.3rem;
+  }
+
+  .nav-bar .nav-search {
+    order: 2;
+    flex-grow: 1;
+  }
+
+  .nav-bar .nav-search input {
+    width: 100%;
   }
 }

@@ -1,5 +1,5 @@
 import Mockman from "mockman-js";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { PrivateRoute } from "./PrivateRoutes";
 import { useAuth } from "../contexts";
 import { Archive, Login, Home, Label, Trash } from "pages";
@@ -15,6 +15,7 @@ const AppRoutes = () => {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/mockman" element={<Mockman />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
       ) : (
@@ -25,6 +26,7 @@ const AppRoutes = () => {
             <Sidebar />
 
             <Routes>
+              <Route path="*" element={<Navigate to="/" replace />} />
               <Route
                 path="/"
                 element={

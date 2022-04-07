@@ -49,6 +49,10 @@ button {
   border: none;
 }
 
+button:active {
+  transform: translateY(1px);
+}
+
 .btn {
   font-size: 1rem;
   padding: 0.3rem 0.5rem;

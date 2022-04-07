@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect } from "react";
+import toast from "react-hot-toast";
 import { useAuth, useNotes } from "contexts";
 import {
   getTrashService,
@@ -6,8 +7,11 @@ import {
   restoreFromTrashService,
   deleteFromTrashService,
 } from "services";
+import { actionTypes } from "reducers/actionTypes";
 
 const TrashContext = createContext();
+
+const { SET_TRASH, SET_NOTES_AND_TRASH } = actionTypes;
 
 const TrashProvider = ({ children }) => {
   const { isAuth, token } = useAuth();
@@ -19,7 +23,7 @@ const TrashProvider = ({ children }) => {
         const { data, status } = await getTrashService(token);
 
         if (status === 201) {
-          dispatchNote({ type: "SET_TRASH", payload: data.trash });
+          dispatchNote({ type: SET_TRASH, payload: data.trash });
         }
       })();
     }
@@ -32,12 +36,14 @@ const TrashProvider = ({ children }) => {
       const { data, status } = await moveToTrashService(note, token);
 
       if (status === 201) {
+        toast.success("Note moved to Trash");
         dispatchNote({
-          type: "SET_NOTES_AND_TRASH",
+          type: SET_NOTES_AND_TRASH,
           payload: { notes: data.notes, trash: data.trash },
         });
       }
     } catch (err) {
+      toast.error("Error occured");
       console.error(err);
     }
   };
@@ -49,12 +55,14 @@ const TrashProvider = ({ children }) => {
       const { data, status } = await restoreFromTrashService(note, token);
 
       if (status === 200) {
+        toast.success("Note restored");
         dispatchNote({
-          type: "SET_NOTES_AND_TRASH",
+          type: SET_NOTES_AND_TRASH,
           payload: { notes: data.notes, trash: data.trash },
         });
       }
     } catch (err) {
+      toast.error("Error occured");
       console.error(err);
     }
   };
@@ -66,12 +74,14 @@ const TrashProvider = ({ children }) => {
       const { data, status } = await deleteFromTrashService(note, token);
 
       if (status === 200) {
+        toast.success("Note deleted permanently");
         dispatchNote({
-          type: "SET_TRASH",
+          type: SET_TRASH,
           payload: data.trash,
         });
       }
     } catch (err) {
+      toast.error("Error occured");
       console.error(err);
     }
   };

@@ -43,3 +43,41 @@ aside .profile {
 aside .username {
   padding-left: 0.5rem;
 }
+
+@media screen and (max-width: 650px) {
+  aside {
+    position: absolute;
+    bottom: 0;
+    padding: 0.5rem 0.25rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: max-content;
+    width: 100vw;
+    background-color: rgb(203, 203, 203);
+  }
+
+  aside ul {
+    display: flex;
+  }
+
+  aside a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0.25rem;
+    font-size: 0.9rem;
+  }
+
+  aside i {
+    margin: 0;
+  }
+
+  aside .profile {
+    width: max-content;
+  }
+
+  aside .profile .username {
+    display: none;
+  }
+}

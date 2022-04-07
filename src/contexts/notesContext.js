@@ -5,6 +5,7 @@ import {
   useEffect,
   useReducer,
 } from "react";
+import toast from "react-hot-toast";
 import { noteReducer } from "reducers/noteReducer";
 import { useAuth } from "contexts";
 import {
@@ -13,6 +14,7 @@ import {
   editNoteService,
   editArchiveService,
 } from "services";
+import { actionTypes } from "reducers/actionTypes";
 
 const NotesContext = createContext();
 
@@ -21,8 +23,10 @@ const formInputs = {
   content: "<p><br></p>",
   tags: [],
   bgColor: "#F5F5F5",
-  priority: "",
+  priority: { Low: "1" },
 };
+
+const { SET_NOTES, SET_ARCHIVED } = actionTypes;
 
 const NotesProvider = ({ children }) => {
   const { isAuth, token } = useAuth();
@@ -49,34 +53,67 @@ const NotesProvider = ({ children }) => {
         const { data, status } = await getNoteService(token);
 
         if (status === 200) {
-          dispatchNote({ type: "SET_NOTES", payload: data.notes });
+          dispatchNote({ type: SET_NOTES, payload: data.notes });
         }
       })();
     }
   }, [token]);
 
   const updateNoteHandler = async (currentNote) => {
-    try {
-      const { data, status } = await editNoteService(
-        {
-          ...currentNote,
-          title: currentNote.title.trim(),
-          content: currentNote.content.trim(),
-          tags: currentNote.tags,
-          bgColor: currentNote.bgColor,
-          priority: currentNote.priority,
-        },
-        token
-      );
+    const archiveExists = noteState.archives?.find(
+      (note) => note._id === currentNote._id
+    );
 
-      if (status === 201) {
-        dispatchNote({
-          type: "SET_NOTES",
-          payload: data.notes,
-        });
+    if (archiveExists) {
+      try {
+        const { data, status } = await editArchiveService(
+          {
+            ...archiveExists,
+            title: currentNote.title.trim(),
+            content: currentNote.content.trim(),
+            tags: currentNote.tags,
+            bgColor: currentNote.bgColor,
+            priority: currentNote.priority,
+          },
+          token
+        );
+
+        if (status === 201) {
+          toast.success("Note edited");
+          dispatchNote({
+            type: SET_ARCHIVED,
+            payload: data.archives,
+          });
+        }
+      } catch (err) {
+        toast.error("Error occured");
+        console.error(err);
       }
-    } catch (err) {
-      console.error(err);
+    } else {
+      try {
+        const { data, status } = await editNoteService(
+          {
+            ...currentNote,
+            title: currentNote.title.trim(),
+            content: currentNote.content.trim(),
+            tags: currentNote.tags,
+            bgColor: currentNote.bgColor,
+            priority: currentNote.priority,
+          },
+          token
+        );
+
+        if (status === 201) {
+          toast.success("Note updated");
+          dispatchNote({
+            type: SET_NOTES,
+            payload: data.notes,
+          });
+        }
+      } catch (err) {
+        toast.error("Error occured");
+        console.error(err);
+      }
     }
   };
 
@@ -97,12 +134,14 @@ const NotesProvider = ({ children }) => {
         );
 
         if (status === 201) {
+          toast.success("Note edited");
           dispatchNote({
-            type: "SET_NOTES",
+            type: SET_NOTES,
             payload: data.notes,
           });
         }
       } catch (err) {
+        toast.error("Error occured");
         console.error(err);
       }
     } else if (archiveExists) {
@@ -120,12 +159,14 @@ const NotesProvider = ({ children }) => {
         );
 
         if (status === 201) {
+          toast.success("Note edited");
           dispatchNote({
-            type: "SET_ARCHIVED",
+            type: SET_ARCHIVED,
             payload: data.archives,
           });
         }
       } catch (err) {
+        toast.error("Error occured");
         console.error(err);
       }
     } else {
@@ -142,12 +183,14 @@ const NotesProvider = ({ children }) => {
         );
 
         if (status === 201) {
+          toast.success("Note added");
           dispatchNote({
-            type: "SET_NOTES",
+            type: SET_NOTES,
             payload: data.notes,
           });
         }
       } catch (err) {
+        toast.error("Error occured");
         console.error(err);
       }
     }

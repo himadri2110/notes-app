@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginService } from "services";
@@ -34,6 +35,10 @@ const AuthProvider = ({ children }) => {
 
     try {
       const { data } = await loginService(login.input);
+      toast.success(`Welcome back, ${data.foundUser.firstName}!`, {
+        icon: "👋",
+      });
+
       localStorage.setItem("isAuth", true);
       localStorage.setItem("token", data.encodedToken);
       setToken(data.encodedToken);
@@ -43,6 +48,7 @@ const AuthProvider = ({ children }) => {
 
       navigate("/");
     } catch (err) {
+      toast.error("Error occured");
       setLogin({ ...login, error: err.response.data.errors[0] });
     }
   };
@@ -51,6 +57,7 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
     localStorage.setItem("isAuth", false);
     setIsAuth(false);
+    toast.success("Logged out successfully");
     navigate("/");
   };
 

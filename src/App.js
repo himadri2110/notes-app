@@ -1,4 +1,5 @@
 import "./App.css";
+import { Toaster } from "react-hot-toast";
 import { AppRoutes } from "./routes/AppRoutes";
 import { useNotes } from "contexts";
 
@@ -8,6 +9,13 @@ function App() {
   return (
     <div className={`App ${showInput ? "bg-overlay" : null}`}>
       <AppRoutes />
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        containerStyle={{
+          top: "4rem",
+        }}
+      />
     </div>
   );
 }

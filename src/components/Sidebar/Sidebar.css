@@ -46,15 +46,17 @@ aside .username {
 
 @media screen and (max-width: 650px) {
   aside {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     padding: 0.5rem 0.25rem;
+    margin-top: 2rem;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     height: max-content;
     width: 100vw;
     background-color: var(--bg-color);
+    z-index: 2;
   }
 
   aside ul {
